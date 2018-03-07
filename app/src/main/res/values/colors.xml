@@ -3,4 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <!--Colours Schemes-->
+    <color name="lighter_shade">#eeeeee</color>
+    <color name="medium_shade">#e0e0e0</color>
+    <color name="darker_shade">#bdbdbd</color>
 </resources>

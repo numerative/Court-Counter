@@ -2,8 +2,23 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Primary theme color of the app (sets background color of app bar) -->
-        <item name="colorPrimary">#FF9800</item>
+        <item name="colorPrimary">@color/medium_shade</item>
         <!-- Background color of buttons in the app -->
-        <item name="colorButtonNormal">#FF9800</item>
+        <item name="colorButtonNormal">@color/lighter_shade</item>
+        <!--Primary Colour But Darker-->
+        <item name="colorPrimaryDark">@color/darker_shade</item>
+    </style>
+    <!--Style for Displaying Stats-->
+    <style name="stats_label">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">8dp</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+    <style name="stats_count" parent="stats_label">
+        <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 </resources>

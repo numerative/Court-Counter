@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">Court Counter</string>
+    <string name="score">Score</string>
+    <string name="overs">Overs:</string>
+    <string name="runs_required">Runs Required:</string>
+    <string name="run_rate">Run Rate:</string>
+    <string name="required_run_rate">Required Run Rate:</string>
+
+    <!--Button Strings-->
+    <string name="four">4</string>
+    <string name="six">6</string>
+    <string name="one">1</string>
+    <string name="zero">0</string>
+    <string name="wicket">Wicket</string>
+    <string name="no_ball">N.B. / Wide</string>
 </resources>
