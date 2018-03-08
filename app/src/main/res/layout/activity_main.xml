@@ -194,16 +194,19 @@
             android:orientation="horizontal">
 
             <Switch
+                android:id="@+id/switch_key"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textOff="Team A"
-                android:textOn="Team B" />
+                android:text="@string/batting_side"
+                android:trackTint="@color/darker_shade"
+                android:trackTintMode="src_over" />
 
             <TextView
+                android:id="@+id/batting_side"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/basic_gap"
-                android:text="Team A is Batting" />
+                tools:text="Team A is Batting" />
         </LinearLayout>
 
         <TextView

@@ -14,4 +14,5 @@
     <string name="zero">0</string>
     <string name="wicket">Wicket</string>
     <string name="no_ball">N.B. / Wide</string>
+    <string name="batting_side">Switch Batting Side</string>
 </resources>

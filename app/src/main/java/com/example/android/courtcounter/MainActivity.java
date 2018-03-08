@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -12,7 +14,9 @@ public class MainActivity extends AppCompatActivity {
     int runs = 0, wickets = 0, overs = 0, balls = 0, runsRequired = 0, runRate = 0,
             requiredRunRate = 0;
     Button fourButton, sixButton, oneButton, zeroButton, outButton, wideButton;
-    TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount, requiredRunRateCount;
+    TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount, requiredRunRateCount,
+            battingSide;
+    Switch switchKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,28 @@ public class MainActivity extends AppCompatActivity {
         runsRequiredCount = findViewById(R.id.runs_required_count);
         runRateCount = findViewById(R.id.run_rate_count);
         requiredRunRateCount = findViewById(R.id.required_rr_count);
+        battingSide = findViewById(R.id.batting_side);
+
+        //Switch
+        switchKey = findViewById(R.id.switch_key);
+        //Setting up switch logic
+        //Initial Check
+        if (switchKey.isChecked()) {
+            battingSide.setText("Team B is Batting");
+        } else {
+            battingSide.setText("Team A is Batting");
+        }
+        //Check for state change and perform accordingly
+        switchKey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (switchKey.isChecked()) {
+                    battingSide.setText("Team B is Batting");
+                } else {
+                    battingSide.setText("Team A is Batting");
+                }
+            }
+        });
 
 
         //Setting onClickListener on the Buttons for Runs
