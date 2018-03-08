@@ -157,12 +157,12 @@
                     android:text="@string/one" />
 
                 <Button
+                    android:id="@+id/zero"
                     android:layout_width="@dimen/button_radius"
                     android:layout_height="@dimen/button_radius"
                     android:layout_below="@id/four"
                     android:layout_toEndOf="@id/one"
                     android:background="@drawable/bottom_right_button_properties"
-
                     android:text="@string/zero" />
             </RelativeLayout>
 

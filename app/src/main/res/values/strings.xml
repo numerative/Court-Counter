@@ -2,6 +2,7 @@
     <string name="app_name">Court Counter</string>
     <string name="score">Score</string>
     <string name="overs">Overs:</string>
+    <string name="ball_count">%1$d.%2$d</string>
     <string name="runs_required">Runs Required:</string>
     <string name="run_rate">Run Rate:</string>
     <string name="required_run_rate">Required Run Rate:</string>
