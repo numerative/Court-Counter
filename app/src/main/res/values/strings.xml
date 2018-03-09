@@ -15,4 +15,10 @@
     <string name="wicket">Wicket</string>
     <string name="no_ball">N.B. / Wide</string>
     <string name="batting_side">Switch Batting Side</string>
+
+    <!--Toast Strings-->
+    <string name="team_b_batted">Can\'t Team B has started batting.</string>
+    <string name="team_a_batted">Can\'t! Team A has started batting.</string>
+    <string name="second_innings">End of First Innings.</string>
+    <string name="let_the_game_end">Let the innings end for final result.</string>
 </resources>
