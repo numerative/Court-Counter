@@ -175,7 +175,6 @@ public class MainActivity extends AppCompatActivity {
         runsRequiredCount.setText(String.valueOf(runsRequired));
         runRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", runRate)));
         requiredRunRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", requiredRunRate)));
-
     }
 
     //Method that will perform all checks for keeping the scores
@@ -250,5 +249,46 @@ public class MainActivity extends AppCompatActivity {
                 requiredRunRate = 6.0 * runsRequired / ballsRemaining; // Formula for Required Run Rate
             }
         }
+    }
+
+    //Handling the screen rotation
+    @Override
+    protected void onSaveInstanceState(Bundle outState) { //Save all variables to outState
+        super.onSaveInstanceState(outState);
+        outState.putInt("runs", runs);
+        outState.putInt("wickets", wickets);
+        outState.putInt("overs", overs);
+        outState.putInt("totalBalls", totalBalls);
+        outState.putInt("ballsInAnOver", ballsInAnOver);
+        outState.putInt("runsRequired", runsRequired);
+        outState.putInt("teamARuns", teamARuns);
+        outState.putInt("teamBRuns", teamBRuns);
+        outState.putInt("teamAWickets", teamAWickets);
+        outState.putInt("teamBWickets", teamBWickets);
+        outState.putInt("innings", innings);
+        outState.putInt("firstInningsRuns", firstInningsRuns);
+        outState.putInt("firstInningsWickets", firstInningsWickets);
+        outState.putDouble("runRate", runRate);
+        outState.putDouble("requiredRunRate", requiredRunRate);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) { //Restore all variables
+        super.onRestoreInstanceState(savedInstanceState);
+        runs = savedInstanceState.getInt("runs");
+        overs = savedInstanceState.getInt("overs");
+        totalBalls = savedInstanceState.getInt("totalBalls");
+        ballsInAnOver = savedInstanceState.getInt("ballsInAnOver");
+        runsRequired = savedInstanceState.getInt("runsRequired");
+        teamARuns = savedInstanceState.getInt("teamARuns");
+        teamBRuns = savedInstanceState.getInt("teamBRuns");
+        teamAWickets = savedInstanceState.getInt("teamAWickets");
+        teamBWickets = savedInstanceState.getInt("teamBWickets");
+        innings = savedInstanceState.getInt("innings");
+        firstInningsRuns = savedInstanceState.getInt("firstInningsRuns");
+        firstInningsWickets = savedInstanceState.getInt("firstInningsWickets");
+        runRate = savedInstanceState.getDouble("runRate");
+        requiredRunRate = savedInstanceState.getDouble("requiredRunRate");
+        updateDisplay(); //Update display once variables are restored
     }
 }
