@@ -6,6 +6,11 @@
     <string name="runs_required">Runs Required:</string>
     <string name="run_rate">Run Rate:</string>
     <string name="required_run_rate">Required Run Rate:</string>
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+    <string name="team_has_won">%s won! Woohoo!</string>
+    <string name="team_is_batting">%s is Batting</string>
+    <string name="draw">It\'s a draw!</string>
 
     <!--Button Strings-->
     <string name="four">4</string>
@@ -17,8 +22,7 @@
     <string name="batting_side">Switch Batting Side</string>
 
     <!--Toast Strings-->
-    <string name="team_b_batted">Can\'t Team B has started batting.</string>
-    <string name="team_a_batted">Can\'t! Team A has started batting.</string>
+    <string name="team_batted">Can\'t %s has started batting.</string>
     <string name="second_innings">End of First Innings.</string>
     <string name="let_the_game_end">Let the innings end for final result.</string>
 </resources>

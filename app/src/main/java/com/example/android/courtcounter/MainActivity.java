@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     double runRate = 0, requiredRunRate = 0;
     Button fourButton, sixButton, oneButton, zeroButton, outButton, wideButton;
     TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount,
-            requiredRunRateCount, battingSide;
+            requiredRunRateCount, battingSide, results;
     Switch switchKey;
 
     @Override
@@ -44,15 +44,16 @@ public class MainActivity extends AppCompatActivity {
         runRateCount = findViewById(R.id.run_rate_count);
         requiredRunRateCount = findViewById(R.id.required_rr_count);
         battingSide = findViewById(R.id.batting_side);
+        results = findViewById(R.id.results);
 
         //Switch
         switchKey = findViewById(R.id.switch_key);
         //Setting up switch logic
         //Initial Check
         if (switchKey.isChecked()) {
-            battingSide.setText("Team B is Batting");
+            battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_b)));
         } else {
-            battingSide.setText("Team A is Batting");
+            battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_a)));
         }
         //Check for state change and perform accordingly
         switchKey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -62,26 +63,26 @@ public class MainActivity extends AppCompatActivity {
                     if ((teamARuns > 0 || teamAWickets > 0) && innings == 1) { //Ensure Team A has not played yet
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
-                                getResources().getString(R.string.team_a_batted), Toast.LENGTH_LONG).show();
+                                getResources().getString(R.string.team_batted, getResources().getString(R.string.team_a)), Toast.LENGTH_LONG).show();
                     } else if (innings == 2) { //When the second innings have begun and switch is pressed
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
-                                getResources().getString(R.string.team_a_batted), Toast.LENGTH_LONG).show();
+                                getResources().getString(R.string.team_batted, getResources().getString(R.string.team_a)), Toast.LENGTH_LONG).show();
                     } else {
-                        battingSide.setText("Team B is Batting"); //When score is zero, allow toggle.
+                        battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_b))); //When score is zero, allow toggle.
 
                     }
                 } else {
                     if ((teamBRuns > 0 || teamBWickets > 0) && innings == 1) { //Ensure Team B has not played yet
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
-                                getResources().getString(R.string.team_b_batted), Toast.LENGTH_LONG).show();
+                                getResources().getString(R.string.team_batted, getResources().getString(R.string.team_b)), Toast.LENGTH_LONG).show();
                     } else if (innings == 2) { //When the second innings have begun and switch is pressed
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
-                                getResources().getString(R.string.team_a_batted), Toast.LENGTH_LONG).show();
+                                getResources().getString(R.string.team_batted, getResources().getString(R.string.team_b)), Toast.LENGTH_LONG).show();
                     } else {
-                        battingSide.setText("Team A is Batting");
+                        battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_a)));
                     }
                 }
             }
@@ -165,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
 
     //Method to refresh Display
     private void updateDisplay() {
+        //Perform Team Score Updation
+        scoreCheck();
         runsCount.setText(String.valueOf(runs));
         wicketsCount.setText(String.valueOf(wickets));
         oversCount.setText(String.format(getResources().
@@ -172,8 +175,7 @@ public class MainActivity extends AppCompatActivity {
         runsRequiredCount.setText(String.valueOf(runsRequired));
         runRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", runRate)));
         requiredRunRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", requiredRunRate)));
-        //Perform Team Score Updation
-        scoreCheck();
+
     }
 
     //Method that will perform all checks for keeping the scores
@@ -197,15 +199,31 @@ public class MainActivity extends AppCompatActivity {
             wickets = 0;
             overs = 0;
             totalBalls = 0;
+            ballsInAnOver = 0;
             runRate = 0;
-            updateDisplay();
 
             switchKey.toggle(); //Toggle switch and display toast
             Toast.makeText(MainActivity.this,
                     getResources().getString(R.string.second_innings), Toast.LENGTH_LONG).show();
             innings = 2; //Finally change back the innings counter to 2.
-        } else if ((wickets == MAX_WICKETS || overs == MAX_OVERS) && innings == 2) {
-            //TODO: Declare who won
+            updateStats();
+            updateDisplay();
+        } else if ((wickets == MAX_WICKETS || overs == MAX_OVERS || runs > firstInningsRuns) && innings == 2) { //Finally, who won?
+            innings = 3; //Signifies match has ended.
+            if (teamARuns > teamBRuns) { //When Team A wins
+                results.setText(getResources().getString(R.string.team_has_won, getResources().getString(R.string.team_a)));
+            } else if (teamBRuns > teamARuns) { //When Team B wins
+                results.setText(getResources().getString(R.string.team_has_won, getResources().getString(R.string.team_b)));
+            } else {
+                results.setText(getResources().getString(R.string.draw));
+            }
+            //Disabling all buttons
+            fourButton.setEnabled(false);
+            sixButton.setEnabled(false);
+            oneButton.setEnabled(false);
+            zeroButton.setEnabled(false);
+            outButton.setEnabled(false);
+            wideButton.setEnabled(false);
         }
     }
 

@@ -210,10 +210,11 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/results"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/breathing_gap"
-            android:text="TEAM A WON" />
+            tools:text="TEAM A WON" />
     </LinearLayout>
 </ScrollView>
