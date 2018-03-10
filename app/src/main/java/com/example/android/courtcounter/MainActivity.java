@@ -9,13 +9,16 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity {
     //Initialize Static Variables
     static final int FOUR = 4, SIX = 6, ONE = 1, ZERO = 0, MAX_OVERS = 2, MAX_WICKETS = 3;
     //Initialize Global Variables
-    int runs = 0, wickets = 0, overs = 0, balls = 0, runsRequired = 0, runRate = 0,
-            requiredRunRate = 0, teamARuns = 0, teamBRuns = 0, teamBWickets = 0, teamAWickets = 0,
-            innings = 0;
+    int runs = 0, wickets = 0, overs = 0, totalBalls = 0, ballsInAnOver = 0, runsRequired = 0,
+            teamARuns = 0, teamBRuns = 0, teamBWickets = 0, teamAWickets = 0,
+            innings = 0, firstInningsRuns = 0, firstInningsWickets = 0;
+    double runRate = 0, requiredRunRate = 0;
     Button fourButton, sixButton, oneButton, zeroButton, outButton, wideButton;
     TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount,
             requiredRunRateCount, battingSide;
@@ -60,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
                                 getResources().getString(R.string.team_a_batted), Toast.LENGTH_LONG).show();
-                        return;
                     } else if (innings == 2) { //When the second innings have begun and switch is pressed
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
@@ -74,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
                                 getResources().getString(R.string.team_b_batted), Toast.LENGTH_LONG).show();
-                        return;
                     } else if (innings == 2) { //When the second innings have begun and switch is pressed
                         switchKey.toggle(); //Prevent user from toggling and display a toast message
                         Toast.makeText(MainActivity.this,
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 runs = runs + FOUR;
                 addOneBall();
+                updateStats();
                 updateDisplay();
             }
         });
@@ -103,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 runs = runs + SIX;
                 addOneBall();
+                updateStats();
                 updateDisplay();
             }
         });
@@ -112,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 runs = runs + ONE;
                 addOneBall();
+                updateStats();
                 updateDisplay();
             }
         });
@@ -121,6 +125,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 runs = runs + ZERO;
                 addOneBall();
+                updateStats();
                 updateDisplay();
             }
         });
@@ -132,6 +137,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 wickets = wickets + 1;
                 addOneBall();
+                updateStats();
                 updateDisplay();
             }
         });
@@ -140,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 runs = runs + ONE;
+                updateStats();
                 updateDisplay();
             }
         });
@@ -147,11 +154,13 @@ public class MainActivity extends AppCompatActivity {
 
     //Method to Add one ball
     private void addOneBall() {
-        balls++;
-        if (balls == 6) {
-            balls = 0;
-            overs++;
+        totalBalls++;
+        ballsInAnOver++;
+        if (ballsInAnOver > 5) {
+            ballsInAnOver = 0;
         }
+        double oversWithDecimal = totalBalls / 6; //Find the number of the over being bowled
+        overs = (int) oversWithDecimal; //Casting double to an int will remove anything after the decimal
     }
 
     //Method to refresh Display
@@ -159,14 +168,10 @@ public class MainActivity extends AppCompatActivity {
         runsCount.setText(String.valueOf(runs));
         wicketsCount.setText(String.valueOf(wickets));
         oversCount.setText(String.format(getResources().
-                getString(R.string.ball_count), overs, balls)); //This is new - using placeholders instead of concatenating
+                getString(R.string.ball_count), overs, ballsInAnOver)); //This is new - using placeholders instead of concatenating
         runsRequiredCount.setText(String.valueOf(runsRequired));
-        runRateCount.setText(String.valueOf(runRate));
-        requiredRunRateCount.setText(String.valueOf(requiredRunRate));
-
-        if (innings == 0 && (runs > 0 || wickets > 0 || balls > 0 || overs > 0)) { //Whether the first innings have begun or not.
-            innings = 1; //1 means 1st innings have started
-        }
+        runRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", runRate)));
+        requiredRunRateCount.setText(String.valueOf(String.format(Locale.ENGLISH, "%.2f", requiredRunRate)));
         //Perform Team Score Updation
         scoreCheck();
     }
@@ -184,11 +189,15 @@ public class MainActivity extends AppCompatActivity {
         //Check for change of innings condition
         if ((wickets == MAX_WICKETS || overs == MAX_OVERS) && innings == 1) { //Condition True when game is in 1st innings
             innings = -1; // Transition phase.
+            //Store 1st Innings Scorecard
+            firstInningsRuns = runs;
+            firstInningsWickets = wickets;
             //Reset Counters to Zero
             runs = 0;
             wickets = 0;
             overs = 0;
-            balls = 0;
+            totalBalls = 0;
+            runRate = 0;
             updateDisplay();
 
             switchKey.toggle(); //Toggle switch and display toast
@@ -197,6 +206,31 @@ public class MainActivity extends AppCompatActivity {
             innings = 2; //Finally change back the innings counter to 2.
         } else if ((wickets == MAX_WICKETS || overs == MAX_OVERS) && innings == 2) {
             //TODO: Declare who won
+        }
+    }
+
+    //Update Stats
+    public void updateStats() {
+        if (innings == 0 && (runs > 0 || wickets > 0 || totalBalls > 0 || overs > 0)) { //Whether the first innings have begun or not.
+            innings = 1; //1 means 1st innings have started
+        }
+        if (innings == 1 || innings == 2) { //Update Runrate for 1st and 2nd innings
+            runRate = (6.0 * runs / totalBalls); //Formula for Run Rate
+            runsRequiredCount.setText("-");
+            requiredRunRateCount.setText("-");
+        }
+        if (innings == 2) { //If in second innings, calculate RRR and Runs Required
+            //Runs Required to Win
+            runsRequired = firstInningsRuns + 1 - runs;
+            if (runsRequired < 0) { //When second team scores more than first team
+                runsRequired = 0;
+                runsRequiredCount.setText("-");
+            }
+            //Calculating Required Run Rate
+            int ballsRemaining = (MAX_OVERS * 6) - totalBalls; //Calculate remaining totalBalls in an over
+            if (ballsRemaining > 0) {
+                requiredRunRate = 6.0 * runsRequired / ballsRemaining; // Formula for Required Run Rate
+            }
         }
     }
 }
