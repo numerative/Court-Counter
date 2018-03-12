@@ -5,7 +5,9 @@
     <color name="colorAccent">#FF4081</color>
 
     <!--Colours Schemes-->
-    <color name="lighter_shade">#eeeeee</color>
-    <color name="medium_shade">#e0e0e0</color>
-    <color name="darker_shade">#bdbdbd</color>
+    <color name="lightest_shade">#FAEBCD</color>
+    <color name="lighter_shade">#FCCDB0</color>
+    <color name="medium_shade">#FAB496</color>
+    <color name="darker_shade">#E69B87</color>
+    <color name="text_win_color">#AAD2BE</color>
 </resources>

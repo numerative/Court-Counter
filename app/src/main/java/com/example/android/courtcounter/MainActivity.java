@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     double runRate = 0, requiredRunRate = 0;
     Button fourButton, sixButton, oneButton, zeroButton, outButton, wideButton;
     TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount,
-            requiredRunRateCount, battingSide, results;
+            requiredRunRateCount, battingSide, results, scoreCardBattingTeam;
     Switch switchKey;
 
     @Override
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         requiredRunRateCount = findViewById(R.id.required_rr_count);
         battingSide = findViewById(R.id.batting_side);
         results = findViewById(R.id.results);
+        scoreCardBattingTeam = findViewById(R.id.score_card_batting_team_name);
 
         //Switch
         switchKey = findViewById(R.id.switch_key);
@@ -52,8 +53,11 @@ public class MainActivity extends AppCompatActivity {
         //Initial Check
         if (switchKey.isChecked()) {
             battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_b)));
+            scoreCardBattingTeam.setText(getResources().getString(R.string.team_b));
+
         } else {
             battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_a)));
+            scoreCardBattingTeam.setText(getResources().getString(R.string.team_a));
         }
         //Check for state change and perform accordingly
         switchKey.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -70,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
                                 getResources().getString(R.string.team_batted, getResources().getString(R.string.team_a)), Toast.LENGTH_LONG).show();
                     } else {
                         battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_b))); //When score is zero, allow toggle.
+                        scoreCardBattingTeam.setText(getResources().getString(R.string.team_b));
 
                     }
                 } else {
@@ -83,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
                                 getResources().getString(R.string.team_batted, getResources().getString(R.string.team_b)), Toast.LENGTH_LONG).show();
                     } else {
                         battingSide.setText(getResources().getString(R.string.team_is_batting, getResources().getString(R.string.team_a)));
+                        scoreCardBattingTeam.setText(getResources().getString(R.string.team_a));
                     }
                 }
             }
