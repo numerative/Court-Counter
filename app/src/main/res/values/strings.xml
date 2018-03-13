@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Court Counter</string>
+    <string name="app_name">Cricket Score Keeper</string>
     <string name="score">Score</string>
     <string name="overs">Overs:</string>
     <string name="ball_count">%1$d.%2$d</string>

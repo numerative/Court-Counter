@@ -2,6 +2,8 @@ package com.example.android.courtcounter;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -282,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestoreInstanceState(Bundle savedInstanceState) { //Restore all variables
         super.onRestoreInstanceState(savedInstanceState);
         runs = savedInstanceState.getInt("runs");
+        wickets = savedInstanceState.getInt("wickets");
         overs = savedInstanceState.getInt("overs");
         totalBalls = savedInstanceState.getInt("totalBalls");
         ballsInAnOver = savedInstanceState.getInt("ballsInAnOver");
@@ -296,5 +299,49 @@ public class MainActivity extends AppCompatActivity {
         runRate = savedInstanceState.getDouble("runRate");
         requiredRunRate = savedInstanceState.getDouble("requiredRunRate");
         updateDisplay(); //Update display once variables are restored
+    }
+
+    //Inflating options menu
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.reset_score, menu);
+        return true;
+    }
+
+    //How menu options clicks are handled
+    public boolean onOptionsItemSelected(MenuItem menuItem) {
+        switch (menuItem.getItemId()) {
+            case R.id.reset_scores:
+                //Reset the Scores
+                runs = 0;
+                wickets = 0;
+                overs = 0;
+                totalBalls = 0;
+                ballsInAnOver = 0;
+                runsRequired = 0;
+                teamARuns = 0;
+                teamBRuns = 0;
+                teamAWickets = 0;
+                teamBWickets = 0;
+                innings = 0;
+                firstInningsRuns = 0;
+                firstInningsWickets = 0;
+                runRate = 0;
+                requiredRunRate = 0;
+                updateDisplay(); // Update the screen
+                updateStats(); // Update the Stats
+
+                //Enabling back all buttons
+                fourButton.setEnabled(true);
+                sixButton.setEnabled(true);
+                oneButton.setEnabled(true);
+                zeroButton.setEnabled(true);
+                outButton.setEnabled(true);
+                wideButton.setEnabled(true);
+                //Remove results
+                results.setText("");
+
+        }
+        //Return the selected item
+        return super.onOptionsItemSelected(menuItem);
     }
 }
