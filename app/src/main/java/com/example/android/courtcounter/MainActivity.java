@@ -239,17 +239,14 @@ public class MainActivity extends AppCompatActivity {
         if (innings == 0 && (runs > 0 || wickets > 0 || totalBalls > 0 || overs > 0)) { //Whether the first innings have begun or not.
             innings = 1; //1 means 1st innings have started
         }
-        if (innings == 1 || innings == 2) { //Update Runrate for 1st and 2nd innings
+        if (runs > 0 && (innings == 1 || innings == 2)) { //Update Runrate for 1st and 2nd innings, but not when innings change.
             runRate = (6.0 * runs / totalBalls); //Formula for Run Rate
-            runsRequiredCount.setText("-");
-            requiredRunRateCount.setText("-");
         }
         if (innings == 2) { //If in second innings, calculate RRR and Runs Required
             //Runs Required to Win
             runsRequired = firstInningsRuns + 1 - runs;
             if (runsRequired < 0) { //When second team scores more than first team
                 runsRequired = 0;
-                runsRequiredCount.setText("-");
             }
             //Calculating Required Run Rate
             int ballsRemaining = (MAX_OVERS * 6) - totalBalls; //Calculate remaining totalBalls in an over
@@ -327,8 +324,8 @@ public class MainActivity extends AppCompatActivity {
                 firstInningsWickets = 0;
                 runRate = 0;
                 requiredRunRate = 0;
-                updateDisplay(); // Update the screen
                 updateStats(); // Update the Stats
+                updateDisplay(); // Update the screen
 
                 //Enabling back all buttons
                 fourButton.setEnabled(true);
