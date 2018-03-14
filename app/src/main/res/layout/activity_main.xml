@@ -36,6 +36,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/level_2_gap"
                         android:layout_marginTop="@dimen/basic_gap"
+                        android:textSize="@dimen/normalTextSize"
                         android:textStyle="bold"
                         tools:text="Team A" />
 
@@ -45,7 +46,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
                         android:layout_marginEnd="@dimen/breathing_gap"
-                        android:text="@string/score" />
+                        android:text="@string/score"
+                        android:textSize="@dimen/normalTextSize" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -153,6 +155,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_win_color"
+                    android:textSize="@dimen/normalTextSize"
                     tools:text="Team A score:" />
 
                 <View
@@ -164,19 +167,22 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_win_color"
+                    android:textSize="@dimen/normalTextSize"
                     tools:text="20" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="/"
-                    android:textColor="@color/text_win_color" />
+                    android:textColor="@color/text_win_color"
+                    android:textSize="@dimen/normalTextSize" />
 
                 <TextView
                     android:id="@+id/innings_1_wickets"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="@color/text_win_color"
+                    android:textSize="@dimen/normalTextSize"
                     tools:text="2" />
 
             </LinearLayout>
@@ -197,7 +203,8 @@
                         android:layout_height="@dimen/button_radius"
                         android:layout_toStartOf="@id/vertical_line"
                         android:background="@drawable/top_left_button_properties"
-                        android:text="@string/four" />
+                        android:text="@string/four"
+                        android:textSize="@dimen/normalTextSize" />
 
                     <View
                         android:id="@+id/vertical_line"
@@ -212,7 +219,8 @@
                         android:layout_height="@dimen/button_radius"
                         android:layout_toEndOf="@id/vertical_line"
                         android:background="@drawable/top_right_button_properties"
-                        android:text="@string/six" />
+                        android:text="@string/six"
+                        android:textSize="@dimen/normalTextSize" />
 
                     <View
                         android:id="@+id/horizontal_line"
@@ -227,7 +235,8 @@
                         android:layout_height="@dimen/button_radius"
                         android:layout_below="@id/horizontal_line"
                         android:background="@drawable/bottom_left_button_properties"
-                        android:text="@string/one" />
+                        android:text="@string/one"
+                        android:textSize="@dimen/normalTextSize" />
 
                     <Button
                         android:id="@+id/zero"
@@ -236,7 +245,8 @@
                         android:layout_below="@id/horizontal_line"
                         android:layout_toEndOf="@id/vertical_line"
                         android:background="@drawable/bottom_right_button_properties"
-                        android:text="@string/zero" />
+                        android:text="@string/zero"
+                        android:textSize="@dimen/normalTextSize" />
                 </RelativeLayout>
 
                 <View
@@ -255,7 +265,8 @@
                     android:layout_alignParentEnd="true"
                     android:layout_marginEnd="@dimen/breathing_gap"
                     android:background="@drawable/top_hemisphere_button_properties"
-                    android:text="@string/wicket" />
+                    android:text="@string/wicket"
+                    android:textSize="@dimen/normalTextSize" />
 
                 <Button
                     android:id="@+id/wide"
@@ -265,7 +276,8 @@
                     android:layout_below="@id/horizontal_line2"
                     android:layout_marginEnd="@dimen/breathing_gap"
                     android:background="@drawable/bottom_hemisphere_button_properties"
-                    android:text="@string/no_ball" />
+                    android:text="@string/no_ball"
+                    android:textSize="@dimen/normalTextSize" />
             </RelativeLayout>
 
             <LinearLayout
@@ -280,6 +292,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/batting_side"
+                    android:textSize="@dimen/normalTextSize"
                     android:trackTint="@color/darker_shade"
                     android:trackTintMode="src_over" />
 
@@ -288,6 +301,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/basic_gap"
+                    android:textSize="@dimen/normalTextSize"
                     tools:text="Team A is Batting" />
             </LinearLayout>
 

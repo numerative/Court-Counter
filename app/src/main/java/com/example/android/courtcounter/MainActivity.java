@@ -32,33 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Finding buttons and switches
-        fourButton = findViewById(R.id.four);
-        sixButton = findViewById(R.id.six);
-        oneButton = findViewById(R.id.one);
-        zeroButton = findViewById(R.id.zero);
-        outButton = findViewById(R.id.out);
-        wideButton = findViewById(R.id.wide);
-
-        //Finding TextViews
-        runsCount = findViewById(R.id.runs);
-        wicketsCount = findViewById(R.id.wickets);
-        oversCount = findViewById(R.id.overs_count);
-        runsRequiredLabel = findViewById(R.id.runs_required_label);
-        runsRequiredCount = findViewById(R.id.runs_required_count);
-        runRateCount = findViewById(R.id.run_rate_count);
-        requiredRunRateLabel = findViewById(R.id.required_rr_label);
-        requiredRunRateCount = findViewById(R.id.required_rr_count);
-        battingSide = findViewById(R.id.batting_side);
-        results = findViewById(R.id.results);
-        scoreCardBattingTeam = findViewById(R.id.score_card_batting_team_name);
-        innings1Score = findViewById(R.id.innings_1_score); //LinearLayout
-        innings1Label = findViewById(R.id.innings_1_label);
-        innings1Runs = findViewById(R.id.innings_1_runs);
-        innings1Wickets = findViewById(R.id.innings_1_wickets);
-
-        //Switch
-        switchKey = findViewById(R.id.switch_key);
+        //Initializing all views
+        findAllViews();
         //Setting up switch logic
         //Initial Check
         if (switchKey.isChecked()) {
@@ -405,5 +380,35 @@ public class MainActivity extends AppCompatActivity {
         }
         //Return the selected item
         return super.onOptionsItemSelected(menuItem);
+    }
+
+    private void findAllViews() {
+        //Finding buttons and switches
+        fourButton = findViewById(R.id.four);
+        sixButton = findViewById(R.id.six);
+        oneButton = findViewById(R.id.one);
+        zeroButton = findViewById(R.id.zero);
+        outButton = findViewById(R.id.out);
+        wideButton = findViewById(R.id.wide);
+
+        //Finding TextViews
+        runsCount = findViewById(R.id.runs);
+        wicketsCount = findViewById(R.id.wickets);
+        oversCount = findViewById(R.id.overs_count);
+        runsRequiredLabel = findViewById(R.id.runs_required_label);
+        runsRequiredCount = findViewById(R.id.runs_required_count);
+        runRateCount = findViewById(R.id.run_rate_count);
+        requiredRunRateLabel = findViewById(R.id.required_rr_label);
+        requiredRunRateCount = findViewById(R.id.required_rr_count);
+        battingSide = findViewById(R.id.batting_side);
+        results = findViewById(R.id.results);
+        scoreCardBattingTeam = findViewById(R.id.score_card_batting_team_name);
+        innings1Score = findViewById(R.id.innings_1_score); //LinearLayout
+        innings1Label = findViewById(R.id.innings_1_label);
+        innings1Runs = findViewById(R.id.innings_1_runs);
+        innings1Wickets = findViewById(R.id.innings_1_wickets);
+
+        //Switch
+        switchKey = findViewById(R.id.switch_key);
     }
 }

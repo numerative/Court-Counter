@@ -9,5 +9,5 @@
     <color name="lighter_shade">#FCCDB0</color>
     <color name="medium_shade">#FAB496</color>
     <color name="darker_shade">#E69B87</color>
-    <color name="text_win_color">#AAD2BE</color>
+    <color name="text_win_color">#ff7043</color>
 </resources>

@@ -3,6 +3,7 @@
     <!--Text Sizes-->
     <dimen name="display1TextSize">36sp</dimen>
     <dimen name="display2TextSize">45sp</dimen>
+    <dimen name="normalTextSize">16sp</dimen>
     <!--Margin & Padding gap Sizes-->
     <dimen name="breathing_gap">24dp</dimen>
     <dimen name="basic_gap">8dp</dimen>
