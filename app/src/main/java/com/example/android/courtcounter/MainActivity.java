@@ -22,8 +22,10 @@ public class MainActivity extends AppCompatActivity {
             innings = 0, firstInningsRuns = 0, firstInningsWickets = 0;
     double runRate = 0, requiredRunRate = 0;
     Button fourButton, sixButton, oneButton, zeroButton, outButton, wideButton;
-    TextView runsCount, wicketsCount, oversCount, runsRequiredCount, runRateCount,
-            requiredRunRateCount, battingSide, results, scoreCardBattingTeam;
+    TextView runsCount, wicketsCount, oversCount, runsRequiredLabel, runsRequiredCount,
+            runRateCount, requiredRunRateLabel, requiredRunRateCount, battingSide, results,
+            scoreCardBattingTeam, innings1Label, innings1Runs, innings1Wickets;
+    View innings1Score;
     Switch switchKey;
 
     @Override
@@ -42,12 +44,18 @@ public class MainActivity extends AppCompatActivity {
         runsCount = findViewById(R.id.runs);
         wicketsCount = findViewById(R.id.wickets);
         oversCount = findViewById(R.id.overs_count);
+        runsRequiredLabel = findViewById(R.id.runs_required_label);
         runsRequiredCount = findViewById(R.id.runs_required_count);
         runRateCount = findViewById(R.id.run_rate_count);
+        requiredRunRateLabel = findViewById(R.id.required_rr_label);
         requiredRunRateCount = findViewById(R.id.required_rr_count);
         battingSide = findViewById(R.id.batting_side);
         results = findViewById(R.id.results);
         scoreCardBattingTeam = findViewById(R.id.score_card_batting_team_name);
+        innings1Score = findViewById(R.id.innings_1_score); //LinearLayout
+        innings1Label = findViewById(R.id.innings_1_label);
+        innings1Runs = findViewById(R.id.innings_1_runs);
+        innings1Wickets = findViewById(R.id.innings_1_wickets);
 
         //Switch
         switchKey = findViewById(R.id.switch_key);
@@ -196,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
             teamBWickets = wickets;
         }
         //Check for change of innings condition
-        if ((wickets == MAX_WICKETS || overs == MAX_OVERS) && innings == 1) { //Condition True when game is in 1st innings
+        if ((wickets == MAX_WICKETS || overs == MAX_OVERS) && innings == 1) { //When innings change
             innings = -1; // Transition phase.
             //Store 1st Innings Scorecard
             firstInningsRuns = runs;
@@ -208,6 +216,26 @@ public class MainActivity extends AppCompatActivity {
             totalBalls = 0;
             ballsInAnOver = 0;
             runRate = 0;
+
+            //Display hidden views in second innings
+            runsRequiredLabel.setVisibility(View.VISIBLE);
+            runsRequiredCount.setVisibility(View.VISIBLE);
+            requiredRunRateLabel.setVisibility(View.VISIBLE);
+            requiredRunRateCount.setVisibility(View.VISIBLE);
+            innings1Score.setVisibility(View.VISIBLE);
+
+            //Displaying Innings 1 score
+            if (!switchKey.isChecked()) {
+                innings1Label.setText(getResources().getString(R.string.innings_1_label,
+                        getResources().getString(R.string.team_a)));
+                innings1Runs.setText(String.valueOf(teamARuns));
+                innings1Wickets.setText(String.valueOf(teamAWickets));
+            } else {
+                innings1Label.setText(getResources().getString(R.string.innings_1_label,
+                        getResources().getString(R.string.team_b)));
+                innings1Runs.setText(String.valueOf(teamBRuns));
+                innings1Wickets.setText(String.valueOf(teamBWickets));
+            }
 
             switchKey.toggle(); //Toggle switch and display toast
             Toast.makeText(MainActivity.this,
@@ -275,6 +303,7 @@ public class MainActivity extends AppCompatActivity {
         outState.putInt("firstInningsWickets", firstInningsWickets);
         outState.putDouble("runRate", runRate);
         outState.putDouble("requiredRunRate", requiredRunRate);
+        outState.putBoolean("switchState", switchKey.isChecked());
     }
 
     @Override
@@ -295,7 +324,36 @@ public class MainActivity extends AppCompatActivity {
         firstInningsWickets = savedInstanceState.getInt("firstInningsWickets");
         runRate = savedInstanceState.getDouble("runRate");
         requiredRunRate = savedInstanceState.getDouble("requiredRunRate");
+        switchKey.setChecked(savedInstanceState.getBoolean("switchState"));
         updateDisplay(); //Update display once variables are restored
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        //Hide views only when game is in first innings.
+        if (innings == 1 || innings == 0) {
+            //Hide the runs required and run rate required fields for the first innings
+            runsRequiredLabel.setVisibility(View.INVISIBLE);
+            runsRequiredCount.setVisibility(View.INVISIBLE);
+            requiredRunRateLabel.setVisibility(View.INVISIBLE);
+            requiredRunRateCount.setVisibility(View.INVISIBLE);
+            //Innings 1 score LinearLayout
+            innings1Score.setVisibility(View.INVISIBLE);
+        }
+
+        //Displaying Innings 1 score
+        if (switchKey.isChecked()) {
+            innings1Label.setText(getResources().getString(R.string.innings_1_label,
+                    getResources().getString(R.string.team_a)));
+            innings1Runs.setText(String.valueOf(teamARuns));
+            innings1Wickets.setText(String.valueOf(teamAWickets));
+        } else {
+            innings1Label.setText(getResources().getString(R.string.innings_1_label,
+                    getResources().getString(R.string.team_b)));
+            innings1Runs.setText(String.valueOf(teamBRuns));
+            innings1Wickets.setText(String.valueOf(teamBWickets));
+        }
     }
 
     //Inflating options menu
@@ -324,6 +382,14 @@ public class MainActivity extends AppCompatActivity {
                 firstInningsWickets = 0;
                 runRate = 0;
                 requiredRunRate = 0;
+
+                //Hide the runs required and run rate required fields for the first innings
+                runsRequiredLabel.setVisibility(View.INVISIBLE);
+                runsRequiredCount.setVisibility(View.INVISIBLE);
+                requiredRunRateLabel.setVisibility(View.INVISIBLE);
+                requiredRunRateCount.setVisibility(View.INVISIBLE);
+                innings1Score.setVisibility(View.INVISIBLE); //Innings 1 LinearLayout
+
                 updateStats(); // Update the Stats
                 updateDisplay(); // Update the screen
 
@@ -336,7 +402,6 @@ public class MainActivity extends AppCompatActivity {
                 wideButton.setEnabled(true);
                 //Remove results
                 results.setText("");
-
         }
         //Return the selected item
         return super.onOptionsItemSelected(menuItem);

@@ -12,6 +12,7 @@
     <string name="team_is_batting">%s is Batting</string>
     <string name="draw">It\'s a draw!</string>
     <string name="numerical_zero">0</string>
+    <string name="innings_1_label">%s score:</string>
 
     <!--Button Strings-->
     <string name="four">4</string>

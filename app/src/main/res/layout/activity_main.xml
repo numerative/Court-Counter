@@ -35,7 +35,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="@dimen/level_2_gap"
-                        android:layout_marginTop="@dimen/level_2_gap"
+                        android:layout_marginTop="@dimen/basic_gap"
                         android:textStyle="bold"
                         tools:text="Team A" />
 
@@ -100,43 +100,85 @@
                     <TextView
                         android:id="@+id/runs_required_label"
                         style="@style/stats_label"
-                        android:layout_below="@id/overs_label"
+                        android:layout_below="@id/run_rate_label"
                         android:text="@string/runs_required" />
 
                     <TextView
                         android:id="@+id/runs_required_count"
                         style="@style/stats_count"
                         android:layout_width="wrap_content"
-                        android:layout_below="@id/overs_label"
+                        android:layout_below="@id/run_rate_label"
                         android:layout_toEndOf="@id/required_rr_label"
                         tools:text="106" />
 
                     <TextView
                         android:id="@+id/run_rate_label"
                         style="@style/stats_label"
-                        android:layout_below="@id/runs_required_count"
+                        android:layout_below="@id/overs_count"
                         android:text="@string/run_rate" />
 
                     <TextView
                         android:id="@+id/run_rate_count"
                         style="@style/stats_count"
-                        android:layout_below="@id/runs_required_count"
+                        android:layout_below="@id/overs_count"
                         android:layout_toEndOf="@id/required_rr_label"
                         tools:text="6.666" />
 
                     <TextView
                         android:id="@+id/required_rr_label"
                         style="@style/stats_label"
-                        android:layout_below="@id/run_rate_label"
+                        android:layout_below="@id/runs_required_label"
                         android:text="@string/required_run_rate" />
 
                     <TextView
                         android:id="@+id/required_rr_count"
                         style="@style/stats_count"
-                        android:layout_below="@id/run_rate_count"
+                        android:layout_below="@id/runs_required_label"
                         android:layout_toEndOf="@id/required_rr_label"
                         tools:text="5.666" />
                 </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/innings_1_score"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/breathing_gap"
+                android:layout_marginTop="@dimen/basic_gap"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/innings_1_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_win_color"
+                    tools:text="Team A score:" />
+
+                <View
+                    android:layout_width="@dimen/basic_gap"
+                    android:layout_height="match_parent" />
+
+                <TextView
+                    android:id="@+id/innings_1_runs"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_win_color"
+                    tools:text="20" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="/"
+                    android:textColor="@color/text_win_color" />
+
+                <TextView
+                    android:id="@+id/innings_1_wickets"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_win_color"
+                    tools:text="2" />
+
             </LinearLayout>
 
             <RelativeLayout

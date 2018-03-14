@@ -22,4 +22,8 @@
     <style name="stats_count" parent="stats_label">
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
+
+    <style name="innings_1_text">
+        <item name="android:textSize">10sp</item>
+    </style>
 </resources>
