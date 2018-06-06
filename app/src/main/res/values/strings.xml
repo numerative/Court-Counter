@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Court Counter</string>
+    <!--Team Labels-->
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+    <!--Button Labels. Actions-->
+    <string name="zero">0</string>
+    <string name="plus3">+3 points</string>
+    <string name="plus2">+2 points</string>
+    <string name="free_throw">Free Throw</string>
+    <string name="reset">Reset</string>
+
 </resources>
