@@ -58,8 +58,9 @@ public class MainActivity extends AppCompatActivity {
         displayForTeamB(scoreTeamB);
     }
 
+
     /**
-     * Luckily, this code will reset all Values.
+     * Reset Score Values
      */
     public void resetScore(View v) {
         scoreTeamA = 0;
@@ -72,6 +73,5 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        displayForTeamA(0);
     }
 }
